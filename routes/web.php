@@ -6,6 +6,7 @@ return [
   '/projects' => ['ProjectController', 'index'],
   '/projects/create' => ['ProjectController', 'create'],
   '/projects/show' => ['ProjectController', 'show'],
+  '/projects/delete' => ['ProjectController', 'delete'],
 
   '/tasks' => ['TaskController', 'index'],
   '/tasks/create' => ['TaskController', 'create'],
