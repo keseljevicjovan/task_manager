@@ -2,7 +2,7 @@
 
 Минималистички PHP framework инспирисан Laravel-ом.
 
-## Захтијеви
+## Захтјеви
 
 - PHP (8.0+)
 - MySQL/MariaDB

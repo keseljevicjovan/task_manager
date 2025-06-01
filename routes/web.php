@@ -16,6 +16,7 @@ return [
   '/teams' => ['TeamController', 'index'],
   '/teams/create' => ['TeamController', 'create'],
   '/teams/show' => ['TeamController', 'show'],
+  '/teams/delete' => ['TeamController', 'delete'],
 
   '/about' => ['PageController', 'about'],
 ];

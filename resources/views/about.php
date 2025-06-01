@@ -3,7 +3,7 @@
 
 <p>Минималистички PHP framework инспирисан Laravel-ом.</p>
 
-<h2>Захтијеви</h2>
+<h2>Захтјеви</h2>
 <ul>
   <li>PHP (8.0+)</li>
   <li>MySQL/MariaDB</li>
