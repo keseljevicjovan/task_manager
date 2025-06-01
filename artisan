@@ -36,19 +36,28 @@ function createMigration($name) {
         $table = $matches[1];
     }
 
+    $className = implode('', array_map('ucfirst', explode('_', $name)));
+
     $template = <<<PHP
 <?php
 
-function up(\$conn) {
-    \$sql = "CREATE TABLE {$table} (
-        id INT PRIMARY KEY AUTO_INCREMENT
-    )";
-    \$conn->query(\$sql);
-}
+class $className
+{
+    public function up(mysqli \$conn)
+    {
+        \$sql = "CREATE TABLE IF NOT EXISTS $table (
+            id INT PRIMARY KEY AUTO_INCREMENT
+        )";
 
-function down(\$conn) {
-    \$sql = "DROP TABLE IF EXISTS {$table}";
-    \$conn->query(\$sql);
+        if (!\$conn->query(\$sql)) {
+            throw new Exception(\$conn->error);
+        }
+    }
+
+    public function down(mysqli \$conn)
+    {
+        echo "Down migrations are not supported yet.";
+    }
 }
 
 PHP;
