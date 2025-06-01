@@ -4,7 +4,7 @@ require_once __DIR__ . '/connection.php';
 
 $conn = getConnection();
 
-$migrationsDir = __DIR__ . '/migrations';
+$migrationsDir = __DIR__ . '/../../database/migrations';
 $migrationFiles = glob($migrationsDir . '/*.php');
 sort($migrationFiles);
 

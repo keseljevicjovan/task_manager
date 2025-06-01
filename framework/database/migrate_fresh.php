@@ -24,7 +24,7 @@ while ($row = $tablesResult->fetch_array()) {
 echo "All tables dropped.\n\n";
 
 
-$migrationsDir = __DIR__ . '/migrations';
+$migrationsDir = __DIR__ . '/../../database/migrations';
 $migrationFiles = glob($migrationsDir . '/*.php');
 sort($migrationFiles);
 

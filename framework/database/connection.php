@@ -1,12 +1,12 @@
 <?php
 
-require_once __DIR__ . '/../bootstrap/env.php';
+require_once __DIR__ . '/../../bootstrap/env.php';
 
 function getConnection() {
     static $conn = null;
 
     if ($conn === null) {
-        $db = require __DIR__ . '/../config/database.php';
+        $db = require __DIR__ . '/../../config/database.php';
 
         $conn = new mysqli($db['host'], $db['user'], $db['pass']);
         if ($conn->connect_error) {
