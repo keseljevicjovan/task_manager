@@ -1,4 +1,5 @@
 <h1>KumaraVel</h1>
+<?php require __DIR__ . '/partials/nav.php'; ?>
 
 <p>Минималистички PHP framework инспирисан Laravel-ом.</p>
 
