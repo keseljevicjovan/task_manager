@@ -6,13 +6,21 @@ $conn = getConnection();
 
 echo "Dropping all tables...\n";
 
+$conn->query('SET FOREIGN_KEY_CHECKS = 0');
+
 $tablesResult = $conn->query("SHOW TABLES");
 if (!$tablesResult) {
     die("Error fetching tables: " . $conn->error . "\n");
 }
 
+$tables = [];
 while ($row = $tablesResult->fetch_array()) {
-    $table = $row[0];
+    $tables[] = $row[0];
+}
+
+$tables = array_reverse($tables);
+
+foreach ($tables as $table) {
     echo "Dropping table `$table`... ";
     if ($conn->query("DROP TABLE IF EXISTS `$table`")) {
         echo "OK\n";
@@ -21,8 +29,9 @@ while ($row = $tablesResult->fetch_array()) {
     }
 }
 
-echo "All tables dropped.\n\n";
+$conn->query('SET FOREIGN_KEY_CHECKS = 1');
 
+echo "All tables dropped.\n\n";
 
 $migrationsDir = __DIR__ . '/../../database/migrations';
 $migrationFiles = glob($migrationsDir . '/*.php');
