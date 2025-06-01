@@ -29,6 +29,17 @@ class Kernel
             case 'migrate:fresh':
                 require_once __DIR__ . '/../database/migrate_fresh.php';
                 break;
+      
+            case 'serve':
+                $host = $argument ?? 'localhost:8000';
+                $publicPath = realpath(__DIR__ . '/../../public');
+            
+                echo "Starting development server at http://$host\n";
+                echo "Press Ctrl+C to stop the server\n\n";
+            
+                passthru("php -S $host -t $publicPath");
+                break;
+
 
             default:
                 echo <<<ASCII
@@ -46,6 +57,7 @@ class Kernel
                 echo "    make:migration     Create a new migration\n";
                 echo "    migrate:list       List all migrations\n";
                 echo "    migrate:fresh      Drop all tables and rerun migrations\n";
+                echo "  serve                Serve the application on the PHP development server\n";
                 break;
         }
     }

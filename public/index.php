@@ -1,7 +1,21 @@
 <?php
 
-require_once __DIR__ . '/../bootstrap/env.php';
+require_once __DIR__ . '/../framework/view/view.php';
 
-$db = require __DIR__ . '/../config/database.php';
+$routes = require __DIR__ . '/../routes/web.php';
 
-$conn = new mysqli($db['host'], $db['user'], $db['pass'], $db['name']);
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$uri = rtrim($uri, '/') ?: '/';
+
+if (!array_key_exists($uri, $routes)) {
+    http_response_code(404);
+    echo "404 - Page not found";
+    exit;
+}
+
+[$controllerName, $method] = $routes[$uri];
+
+require_once __DIR__ . '/../app/Http/Controllers/' . $controllerName . '.php';
+
+$controller = new $controllerName();
+echo $controller->$method();
