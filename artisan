@@ -1,0 +1,61 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__ . '/bootstrap/env.php';
+
+$command = $argv[1] ?? null;
+$argument = $argv[2] ?? null;
+
+switch ($command) {
+    case 'migrate':
+        require_once __DIR__ . '/database/migrate.php';
+        break;
+
+    case 'make:migration':
+        if (!$argument) {
+            echo "You must specify a migration name, e.g. create_users_table\n";
+            exit(1);
+        }
+        createMigration($argument);
+        break;
+
+    default:
+        echo "Unknown command.\n";
+        echo "Available commands:\n";
+        echo "  migrate                 Run all migrations\n";
+        echo "  make:migration NAME     Create a new migration\n";
+        break;
+}
+
+function createMigration($name) {
+    $timestamp = date('Y_m_d_His');
+    $fileName = __DIR__ . "/database/migrations/{$timestamp}_{$name}.php";
+
+    $table = $name;
+    if (preg_match('/^create_(.+)_table$/', $name, $matches)) {
+        $table = $matches[1];
+    }
+
+    $template = <<<PHP
+<?php
+
+function up(\$conn) {
+    \$sql = "CREATE TABLE {$table} (
+        id INT PRIMARY KEY AUTO_INCREMENT
+    )";
+    \$conn->query(\$sql);
+}
+
+function down(\$conn) {
+    \$sql = "DROP TABLE IF EXISTS {$table}";
+    \$conn->query(\$sql);
+}
+
+PHP;
+
+    if (file_put_contents($fileName, $template)) {
+        echo "Migration created: {$fileName}\n";
+    } else {
+        echo "Error creating migration file.\n";
+    }
+}
