@@ -8,9 +8,7 @@ class CreateProjectsTable
             id INT PRIMARY KEY AUTO_INCREMENT,
             name VARCHAR(255) NOT NULL,
             description TEXT,
-            team_id INT,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (team_id) REFERENCES teams(id) ON DELETE SET NULL
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )";
 
         if (!$conn->query($sql)) {

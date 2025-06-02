@@ -1,7 +1,6 @@
 <?php
 
 require_once __DIR__ . '/../../Models/Project.php';
-require_once __DIR__ . '/../../Models/Team.php';
 require_once __DIR__ . '/../../../framework/view/view.php';
 
 class ProjectController {
@@ -15,15 +14,13 @@ class ProjectController {
             $data = [
                 'name' => $_POST['name'] ?? '',
                 'description' => $_POST['description'] ?? '',
-                'team_id' => $_POST['team_id'] ?? null,
             ];
             Project::create($data);
             header('Location: /projects');
             exit;
         }
 
-        $teams = Team::all();
-        view('projects/create', ['teams' => $teams]);
+        view('projects/create');
     }
 
     public function show() {
@@ -53,3 +50,4 @@ class ProjectController {
         exit;
     }
 }
+

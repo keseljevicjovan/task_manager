@@ -9,7 +9,7 @@ class Project {
 
     public static function all() {
         $conn = self::getDb();
-        $result = $conn->query("SELECT projects.*, teams.name AS team_name FROM projects LEFT JOIN teams ON projects.team_id = teams.id");
+        $result = $conn->query("SELECT * FROM projects");
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
@@ -23,8 +23,8 @@ class Project {
 
     public static function create($data) {
         $conn = self::getDb();
-        $stmt = $conn->prepare("INSERT INTO projects (name, description, team_id) VALUES (?, ?, ?)");
-        $stmt->bind_param("ssi", $data['name'], $data['description'], $data['team_id']);
+        $stmt = $conn->prepare("INSERT INTO projects (name, description) VALUES (?, ?)");
+        $stmt->bind_param("ss", $data['name'], $data['description']);
         return $stmt->execute();
     }
 

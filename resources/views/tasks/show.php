@@ -8,9 +8,6 @@
 
 <p><strong>Project:</strong> <?= htmlspecialchars($task['project_name']) ?></p>
 
-<form method="POST" action="/tasks/delete" onsubmit="return confirm('Are you sure?');">
-    <input type="hidden" name="id" value="<?= $task['id'] ?>">
-    <button type="submit">Delete Task</button>
-</form>
-
 <a href="/tasks">← Back to tasks</a>
+|
+<a href="/tasks/delete?id=<?= $task['id'] ?>" onclick="return confirm('Are you sure you want to delete this task?')">Delete</a>

@@ -16,8 +16,9 @@ class TaskController {
             $data = [
                 'title' => $_POST['title'] ?? '',
                 'description' => $_POST['description'] ?? '',
-                'project_id' => $_POST['project_id'] ?? null,
                 'team_id' => $_POST['team_id'] ?? null,
+                'project_id' => $_POST['project_id'] ?? null,
+                'status' => $_POST['status'] ?? 'pending',
             ];
             Task::create($data);
             header('Location: /tasks');

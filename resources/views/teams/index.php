@@ -1,7 +1,7 @@
 <h1>Teams</h1>
 <?php require __DIR__ . '/../partials/nav.php'; ?>
 
-<a href="/teams/create">+ Add new team</a>
+<a href="/teams/create">+ New Team</a>
 <ul>
   <?php foreach ($teams as $team): ?>
     <li>

@@ -11,7 +11,7 @@ return [
   '/tasks' => ['TaskController', 'index'],
   '/tasks/create' => ['TaskController', 'create'],
   '/tasks/show' => ['TaskController', 'show'],
-  '/teams/delete' => ['TeamController', 'delete'],
+  '/tasks/delete' => ['TaskController', 'delete'],
 
   '/teams' => ['TeamController', 'index'],
   '/teams/create' => ['TeamController', 'create'],
